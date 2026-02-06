@@ -102,8 +102,8 @@ void loop() {
 
   for (int i = 0; i < 8; i++) {
     w = weights[i];
-    Serial.print(irValue[i]);
-    Serial.print(", ");
+    // Serial.print(irValue[i]);
+    // Serial.print(", ");
     // if (irValue[i] > 0.85) {  // black line
     // // if (irValue[i] == LOW) {  // black line
       sum += w * irValue[i];
@@ -114,8 +114,6 @@ void loop() {
   error = sum / 8.0f;
   // if (count != 0) error = (float)sum / count;
   // else error = prevError;
-  Serial.print("Error: ");
-  Serial.println(error);
 
   unsigned long now = millis();
   float dt = (now - lastTime) / 1000.0;
@@ -132,9 +130,11 @@ void loop() {
   motorLeft(leftSpeed);
   motorRight(rightSpeed);
 
-  Serial.print("l: ");
-  Serial.print(leftSpeed);
-  Serial.print(" r: ");
-  Serial.println(rightSpeed);
-  delay(10);
+  // Serial.print("Error: ");
+  // Serial.println(error);
+  // Serial.print("l: ");
+  // Serial.print(leftSpeed);
+  // Serial.print(" r: ");
+  // Serial.println(rightSpeed);
+  // delay(10);
 }
