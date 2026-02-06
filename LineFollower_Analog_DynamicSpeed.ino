@@ -120,7 +120,8 @@ void loop() {
   lastTime = now;
 
   integral += error * dt;
-  derivative = (error - prevError) / dt;
+  if (dt > 0) derivative = (error - prevError) / dt;
+  else derivative = 0;
 
   PID = (Kp * error) + (Ki * integral) + (Kd * derivative);
   prevError = error;
