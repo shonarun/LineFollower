@@ -183,7 +183,7 @@ void loop() {
   integral += error * dt;
   if (dt > 0.0001) {
     derivative = (error - prevError) / dt;
-    integral = 0;
+    // integral = 0;
   }
   else {
     derivative = 0;
