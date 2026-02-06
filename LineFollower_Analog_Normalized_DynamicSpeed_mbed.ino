@@ -173,8 +173,20 @@ void loop() {
   // if (count != 0) error = (float)sum / count;
   // else error = prevError;
 
-  if (valueSum > 0.001) error = weightedSum / valueSum;
-  else error = prevError;  // line lost handling
+  if (valueSum > 0.001) {
+    error = weightedSum / valueSum;
+  }
+  else {
+    error = prevError;  // line lost handling
+    // integral = 0;
+    // if (prevError > 0) {
+    //   motorLeft(120);
+    //   motorRight(-120);
+    // } else {
+    //   motorLeft(-120);
+    //   motorRight(120);
+    // }
+  }
 
   unsigned long now = millis();
   float dt = (now - lastTime) / 1000.0;
