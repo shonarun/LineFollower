@@ -124,8 +124,8 @@ void setup() {
   pinMode(STBY, OUTPUT);
   digitalWrite(STBY, HIGH);
 
-  pwmA.period_us(50);
-  pwmB.period_us(50);
+  pwmA.period_us(100);
+  pwmB.period_us(100);
 
   // Start stopped
   pwmA.write(0.0f);
@@ -148,6 +148,7 @@ void loop() {
   // Weighted error for 8 sensors
   // int weights[8] = {-4, -3, -2, -1, 1, 2, 3, 4};
   int weights[8] = {-16, -9, -4, -1, 1, 4, 9, 16};
+  // int weights[8] = {-25, -16, -9, -4, 4, 9, 16, 25};
   // int weights[8] = {64, 27, 8, 1, -1, -8, -27, -64};
   // float sum = 0;
   // int count = 0;
