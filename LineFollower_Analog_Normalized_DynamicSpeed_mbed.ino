@@ -22,7 +22,7 @@ int irMin[8] = {4095, 4095, 4095, 4095, 4095, 4095, 4095, 4095};
 float Kp = 60;
 float Ki = 0;
 float Kd = 40;
-float Kp = 8;
+float Kspeed = 8;
 
 float error = 0;
 float prevError = 0;
@@ -186,7 +186,7 @@ void loop() {
   PID = (Kp * error) + (Ki * integral) + (Kd * derivative);
   prevError = error;
 
-  dynamicSpeed = baseSpeed - Kp * abs(error);
+  dynamicSpeed = baseSpeed - Kspeed * abs(error);
   dynamicSpeed = constrain(dynamicSpeed, 100, baseSpeed);
   int leftSpeed  = dynamicSpeed + PID;
   int rightSpeed = dynamicSpeed - PID;
