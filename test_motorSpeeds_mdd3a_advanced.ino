@@ -13,8 +13,6 @@ mbed::PwmOut pwmA(digitalPinToPinName(PWM_A));
 mbed::PwmOut pwmB(digitalPinToPinName(PWM_B));
 
 void kickStart(mbed::PwmOut& pwm, float targetDuty) {
-  const float KICK_DUTY = 0.75f;
-  const int   KICK_MS   = 40;
 
   pwm.write(KICK_DUTY);
   delay(KICK_MS);
@@ -23,9 +21,12 @@ void kickStart(mbed::PwmOut& pwm, float targetDuty) {
 }
 
 void softStart(mbed::PwmOut& pwm, float targetDuty) {
-  for (float d = 0.8f; d >= targetDuty; d -= 0.02f) {
+  const float KICK_DUTY = 0.75f;
+  const int   PUSH_MS   = 20;
+
+  for (float d = KICK_DUTY; d >= targetDuty; d -= 0.02f) {
     pwm.write(d);
-    delay(20);
+    delay(PUSH_MS);
   }
 }
 
