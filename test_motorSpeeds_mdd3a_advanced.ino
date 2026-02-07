@@ -1,0 +1,60 @@
+// To check motor speeds with MDD3A motor driver...
+#include "mbed.h"
+
+// PIN DEFINITIONS
+// MDD3A Pins
+#define PWM_A 9
+#define DIR_A 3
+
+#define PWM_B 10
+#define DIR_B 6
+
+mbed::PwmOut pwmA(digitalPinToPinName(PWM_A));
+mbed::PwmOut pwmB(digitalPinToPinName(PWM_B));
+
+void kickStart(mbed::PwmOut& pwm, float targetDuty) {
+  const float KICK_DUTY = 0.75f;
+  const int   KICK_MS   = 40;
+
+  pwm.write(KICK_DUTY);
+  delay(KICK_MS);
+
+  pwm.write(targetDuty);
+}
+
+void softStart(mbed::PwmOut& pwm, float targetDuty) {
+  for (float d = 0.8f; d >= targetDuty; d -= 0.02f) {
+    pwm.write(d);
+    delay(20);
+  }
+}
+
+void setup() {
+  pinMode(DIR_A, OUTPUT);
+  pinMode(DIR_B, OUTPUT);
+
+  digitalWrite(DIR_A, LOW);
+  digitalWrite(DIR_B, LOW);
+
+  pwmA.period_us(200);
+  pwmB.period_us(200);
+
+  pwmA.write(0.0f);
+  pwmB.write(0.0f);
+
+  delay(500); 
+
+  pwmA.write(0.6f);
+  pwmB.write(0.6f);
+
+  // kickStart(pwmA, 0.35f);
+  // kickStart(pwmB, 0.35f);
+
+  // softStart(pwmA, 0.35f);
+  // softStart(pwmB, 0.35f);
+
+}
+
+void loop() {
+
+}
