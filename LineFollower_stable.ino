@@ -30,7 +30,7 @@ float derivative = 0;
 float PID = 0;
 
 // SPEED
-int baseSpeed = 80;
+int baseSpeed = 100;
 int dynamicSpeed = baseSpeed;
 
 // TIME
@@ -70,8 +70,6 @@ void stopMotors() {
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
-
   pinMode(AIN1, OUTPUT);
   pinMode(AIN2, OUTPUT);
   pinMode(PWMA, OUTPUT);
@@ -110,8 +108,6 @@ void loop() {
   
   if (count != 0) error = (float)sum / count;
   else error = prevError;
-  // Serial.print("Error: ");
-  // Serial.println(error);
 
   unsigned long now = millis();
   float dt = (now - lastTime) / 1000.0;
@@ -131,10 +127,5 @@ void loop() {
   int rightSpeed = dynamicSpeed + PID;
   motorLeft(leftSpeed);
   motorRight(rightSpeed);
-
-  // Serial.print("l: ");
-  // Serial.print(leftSpeed);
-  // Serial.print(" r: ");
-  // Serial.println(rightSpeed);
   delay(10);
 }
